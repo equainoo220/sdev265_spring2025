@@ -44,7 +44,7 @@ class BorrowRecord():
     due_date = models.DateTimeField()
     return_date = models.DateTimeField()
     return_status = models.BooleanField()
-    #borrow_limit
+    borrow_limit = models.IntegerField()
 
 class BooksBorrowed():
     borrow_record_id = models.ForeignKey(BorrowRecord, on_delete=models.CASCADE)
