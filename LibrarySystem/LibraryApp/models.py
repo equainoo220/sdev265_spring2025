@@ -13,3 +13,24 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
+
+class BorrowRecord():
+    borrow_record_id = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    borrow_date = models.DateTimeField(auto_now_add=True)
+    due_date = models.DateTimeField()
+    return_date = models.DateTimeField()
+    return_status = models.BooleanField()
+    #borrow_limit
+
+class BooksBorrowed():
+    borrow_record_id = models.ForeignKey(BorrowRecord, on_delete=models.CASCADE)
+    book_id = models.ForeignKey(Books, on_delete=models.CASCADE)
+
+class Fine():
+    fine_id = models.AutoField(primary_key=True)
+    borrow_record_id = models.ForeignKey(BorrowRecord, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=5, decimal_places=2)
+    outstanding_balance = models.DecimalField(max_digits=5, decimal_places=2)
+    borrow_date = models.ForeignKey(BorrowRecord, on_delete=models.CASCADE)
+    payment_date = models.DateTimeField()
