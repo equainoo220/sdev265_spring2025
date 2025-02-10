@@ -57,3 +57,17 @@ class Fine():
     outstanding_balance = models.DecimalField(max_digits=5, decimal_places=2)
     borrow_date = models.ForeignKey(BorrowRecord, on_delete=models.CASCADE)
     payment_date = models.DateTimeField()
+
+class Reservation():
+    reservation_id = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    book_id = models.ForeignKey(Book, on_delete=models.CASCADE)
+    reservation_date = models.DateTimeField(auto_now_add=True)
+    reservation_status = models.BooleanField(default=True)
+    expiration_date = models.DateTimeField()
+
+class UserRole():
+    role_id = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    role_description = models.TextField(blank=True, null=True)
+    role_status = models.CharField(max_length=255)
